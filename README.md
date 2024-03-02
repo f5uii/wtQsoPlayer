@@ -55,7 +55,7 @@ You may want to add some webserver rules for deny the access to the main mp3 fil
 
 ### URL parameters
 
-You can reach a specific contest and callsign by add in the URL the parameters like `index.php?search=f5uii&contest=cdf_ssb2024` :
+You can reach a specific contest and callsign by add in the URL the parameters like `index.php?search=f5uii&contest=REF_SSB_2024` :
 - `search=` : callsign
 - `contest=` : contest subdirectory
 
