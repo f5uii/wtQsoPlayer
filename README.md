@@ -53,6 +53,17 @@ This package is totally open, feel free to submit and share your work with the c
 You will access the web page pointing the `index.php` root file.
 You may want to add some webserver rules for deny the access to the main mp3 files. Also you can add empty `index.htm` file in your contest subdirectories.
 
+Here Nginx configuration rules
+# filtrage des mp3 et timestamps contest win-test
+- mp3 file in `REF_*` directory return 403 (reject)
+- all `.ts.txt` files return 403 (reject)
+`location ~ ^/(.+\/)?REF_(.+)\.mp3$ {
+  deny all;
+}
+location ~ ^/(.+\/)?(.+)\.ts\.txt$ {
+  deny all;
+}`
+
 ### URL parameters
 
 You can reach a specific contest and callsign by add in the URL the parameters like `index.php?search=f5uii&contest=REF_SSB_2024` :
