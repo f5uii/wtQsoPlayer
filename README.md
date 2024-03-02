@@ -53,8 +53,7 @@ This package is totally open, feel free to submit and share your work with the c
 You will access the web page pointing the `index.php` root file.
 You may want to add some webserver rules for deny the access to the main mp3 files. Also you can add empty `index.htm` file in your contest subdirectories.
 
-Here Nginx configuration rules
-# filtrage des mp3 et timestamps contest win-test
+Here for Nginx server some directive example to insert in configuration (`/etc/nginx/sites-available/....conf`)
 - mp3 file in `REF_*` directory return 403 (reject)
 - all `.ts.txt` files return 403 (reject)
 ```
