@@ -32,8 +32,8 @@ This package is totally open, feel free to submit and share your work with the c
  - Transfer in it **all** the Win-Test mp3 files, and also the timestamps file (`*.ts.txt`)
  - You can transfer a JPEG image replacing the file qsl.jpg (main directory) or put an specific image for each contest (in contest subdirectory, with a specific name).
 - Configure now the list of managed contest. You will add a line for each more contest : Edit contest_list.csv
- - Do not modify the header line
- - Specify all the columns
+  - Do not modify the header line
+  - Specify all the columns
     - `CONTEST NAME` : Whaterver you want for naming the Contest
     - `DIRECTORY` : Must correspond to the contest subdirectory where mp3 files and timestamps file are located
     - `PUBLICATION(YYYY-MM-DD)`: Date (format `YYYY-MM-DD`) from which your contest will be accessible on the server. We advise you not to publish your audio recordings before the deadline of log submission.
