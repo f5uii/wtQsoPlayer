@@ -57,12 +57,14 @@ Here Nginx configuration rules
 # filtrage des mp3 et timestamps contest win-test
 - mp3 file in `REF_*` directory return 403 (reject)
 - all `.ts.txt` files return 403 (reject)
-`location ~ ^/(.+\/)?REF_(.+)\.mp3$ {
+```
+location ~ ^/(.+\/)?REF_(.+)\.mp3$ {
   deny all;
 }
 location ~ ^/(.+\/)?(.+)\.ts\.txt$ {
   deny all;
-}`
+}
+```
 
 ### URL parameters
 
