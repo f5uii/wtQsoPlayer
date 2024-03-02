@@ -54,7 +54,7 @@ else {
   $details=getLastContestDataFilteredByDate($contestList);
 }
 if ($details) {
-  $contestName= $details['CONTEST NAME'];
+  $contestName= $details['CONTEST_NAME'];
   $contestYear = $details['CONTEST_YEAR'];
   $dataPath = $details['DIRECTORY'];
   if ($details['IMAGE'] && file_exists($dataPath . '/' . $details['IMAGE'])) {
@@ -379,7 +379,7 @@ else {
     echo '<select class="bg-blue-200 rounded px-4 py-1 m-1 " name="Contest" id="Contest">';
     
     foreach ($options as $nomContest => $repertoire) {
-      if ($details["CONTEST NAME"]== $nomContest)  {
+      if ($details["CONTEST_NAME"]== $nomContest)  {
         $selected=" selected ";
       } else $selected ="";
       $disabled = strpos($err[$nomContest], 'missing') !== false ? 'disabled' : ''; // Désactiver le select si "missing" est dans la description
