@@ -81,7 +81,8 @@ if (count($files) === 1) {
 }
 $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
 $url = $protocol . '://' . $_SERVER['HTTP_HOST'] . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$url=rtrim(dirname($url), '/').'/';
+$url = strrpos($url, "/") ? substr($url, 0, strrpos($url, "/")) : $url;
+$url = $url.'/';
 
 include ("mp3class.php");
 ?>
