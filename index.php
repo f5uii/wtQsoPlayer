@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 else {
-  if (isset ($_GET["contest"])) // Search contest with an url link example : ?search=f6ref&contest=wtQSO_fy5ke_REF_ssb_2024
+  if (isset ($_GET["contest"])) // Search contest with an url link example : ?search=f6ref&contest=REF_ssb_2024
   {
     $selectedNomContest = $_GET["contest"];
     if ($selectedNomContest) {
@@ -203,7 +203,7 @@ else
   
 }
 
-// Delete audio clips older than 24h
+// Delete audio clips older than 1h
 
 $hours = 1;
 $limit = time() - (60 * 60 * $hours);
