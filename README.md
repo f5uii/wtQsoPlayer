@@ -32,7 +32,7 @@ version: "3.8"
 services:
   wtqsoplayer:
     container_name: wtqsoplayer
-    image: ghcr.io/f4iey/wtqsoplayer
+    image: ghcr.io/f4iey/wtqsoplayer:main
     ports:
         - "8080:80"
     volumes:
