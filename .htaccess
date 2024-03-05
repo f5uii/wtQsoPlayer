@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{REQUEST_URI} \.(mp3|ts\.txt)$ [NC]
+RewriteRule .* - [F,L]
