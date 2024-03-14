@@ -16,21 +16,21 @@
 
 class mp3
 {
-  var $path = "";
-  var $frameTag = ""; // 3 chars
-  var $frameOffset = -1; // Offset of the first frame from the beginning of the file
-  var $frameLen = 0; // In bytes
-  var $frameTime = 0; // In ms
+  public $path = "";
+  public $frameTag = ""; // 3 chars
+  public $frameOffset = -1; // Offset of the first frame from the beginning of the file
+  public $frameLen = 0; // In bytes
+  public $frameTime = 0; // In ms
 
   // Various data - Will be used in the ID3 tags of the extracted clips
 
-  var $myCallsign;
-  var $myContest;
-  var $myYear;
+  public $myCallsign;
+  public $myContest;
+  public $myYear;
 
   // Constructor
 
-  function mp3($path = "", $myCallsign = "", $myContest = "", $myYear = "")
+  function __construct($path = "", $myCallsign = "", $myContest = "", $myYear = "")
   {
     if ($path != "")
       if (file_exists($path)) // Read file details
