@@ -24,12 +24,12 @@ v1.0 : Dec 2 2009
 
 
 // CONFIGURATION
-$myCallsign = "FY5KE"; // Uppercase
-$clipPath = "audioclips/";
+$myCallsign = getenv('WT_MYCALLSIGN'); // Uppercase
+$clipPath = getenv('WT_CLIP_PATH');
 
-$preQsoDuration = 30; // Seconds
-$postQsoDuration = 30; // Seconds
-$contestList = "contest_list.csv" ; //To be complete separatily each time you want to add a contest online
+$preQsoDuration = getenv('WT_PRE_QSO_DURATION'); // Seconds
+$postQsoDuration = getenv('WT_POST_QSO_DURATION'); // Seconds
+$contestList = getenv('WT_CONTEST_LIST') ; //To be complete separatily each time you want to add a contest online
 // CONFIGURATION (END)
 
 
