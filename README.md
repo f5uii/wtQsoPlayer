@@ -76,6 +76,7 @@ You can reach a specific contest and callsign by add in the URL the parameters l
 - v1.0 : Dec 2 2009 by F6FVY
 - v1.1 : July 31 2010 by F6FVY ([Utils download](http://download.win-test.com/utils/))
 - v1.2 : Feb 2024 by [F5UII](https://www.f5uii.net)
+- v1.3 : Jan 2026 by [F5UII](https://www.f5uii.net) | add a contest page for search across all available contests
 
 
 
