@@ -27,7 +27,7 @@ This package is totally open, feel free to submit and share your work with the c
 ## Installation and configuration on web server
 
 - Transfer the unzipped software on your webserver
-- Specify the data in the index.php file, in section `CONFIGURATION` your callsign (`$myCallsign`), and if you want modify the other parameters like duration of the audio extraction.
+- Specify the data in the config.php file, in section `CONFIGURATION` your callsign (`$myCallsign`), and if you want modify the other parameters like duration of the audio extraction.
 - Create a subdirectory for (each different) contest you want to publish.
  - Transfer in it **all** the Win-Test mp3 files, and also the timestamps file (`*.ts.txt`)
  - You can transfer a JPEG image replacing the file qsl.jpg (main directory) or put an specific image for each contest (in contest subdirectory, with a specific name).
