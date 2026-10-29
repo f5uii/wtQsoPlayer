@@ -65,6 +65,18 @@ location ~ ^/(.+\/)?(.+)\.ts\.txt$ {
 }
 ```
 
+### Hardening (recommended)
+
+- Only the clips generated in `audioclips/` have to be public. The full recordings (`*.mp3`) and the timestamp files (`*.ts.txt`) are read by PHP on the server disk, so you can refuse any direct download of them, whatever the name of your contest directories:
+```
+location ^~ /audioclips/ { try_files $uri =404; }
+location ~* \.(mp3|ts\.txt)$ { return 403; }
+```
+- `config.php`, `mp3class.php`, `freeGlob.php` and `contest_list.csv` are not meant to be requested directly (`return 404;` for them).
+- Each search cuts an mp3 clip (disk and CPU): a rate limit (`limit_req` with nginx) is advisable on `index.php`.
+- Run PHP with a dedicated user and `open_basedir` set to the site directory; only `audioclips/` must be writable by PHP.
+- PHP 8: the mp3 class must use `__construct` (fixed since March 2024). With the old `function mp3()` constructor, no clip is generated and no error is shown.
+
 ### URL parameters
 
 You can reach a specific contest and callsign by add in the URL the parameters like `index.php?search=f5uii&contest=REF_SSB_2024` :
@@ -77,6 +89,7 @@ You can reach a specific contest and callsign by add in the URL the parameters l
 - v1.1 : July 31 2010 by F6FVY ([Utils download](http://download.win-test.com/utils/))
 - v1.2 : Feb 2024 by [F5UII](https://www.f5uii.net)
 - v1.3 : Jan 2026 by [F5UII](https://www.f5uii.net) | add a contest page for search across all available contests
+- v1.3.1 : Oct 2026 by [F5UII](https://www.f5uii.net) | callsign check fixed (typed text was echoed back unescaped), accents fixed, tested with PHP 8.4
 
 
 

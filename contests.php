@@ -181,7 +181,7 @@ if (isset($_POST["search"]) || isset($_GET["search"])) {
                                 href="index.php?search=<?php echo urlencode($callsign); ?>&contest=<?php echo urlencode($result['directory']); ?>"
                                 class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md font-semibold transition-colors"
                             >
-                                .. Listen to QSO
+                                Listen to QSO
                             </a>
                         </div>
                     <?php endforeach; ?>

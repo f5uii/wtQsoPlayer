@@ -8,6 +8,11 @@
 
 /* Version history
 
+v1.3.1 : Oct 2026
+- callsign check anchored (the typed text was echoed back unescaped in the page)
+- accented characters fixed (UTF-8)
+- tested with PHP 8.4 (needs the mp3 class fix of March 2024)
+
 v1.3 : Jan 2026
 - add a contest page for search across all available contests
 - config.php added
@@ -153,7 +158,7 @@ echo "<img class='rounded-md mx-auto' src='".$image."'>";
 <form action='' method='post'>
 Enter your callsign :
 <INPUT type="text" class="bg-blue-200 rounded-md text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
-placeholder="Callsign" size="12" maxlength="12" name="search" value="<?php if (isset($callsign)) echo $callsign; ?>" tabindex="1">
+placeholder="Callsign" size="12" maxlength="12" name="search" value="<?php if (isset($callsign)) echo htmlspecialchars($callsign, ENT_QUOTES, 'UTF-8'); ?>" tabindex="1">
 <!-- <button class= 'rounded text-white bg-sky-500 hover:bg-sky-700' type="submit" value="Search"></button> -->
 <?php echo '<input type="hidden" name="Contest" value="'.$dataPath.'">'; ?>
 <button class="bg-blue-500 hover:bg-blue-600  text-white p-2 rounded-md">
@@ -163,7 +168,7 @@ Search
 
 <audio id="lecteurAudio" controls class="mb-5 mx-auto">
 <source id="sourceAudio" src="" type="audio/mp3">
-Your browser does not support audio | Votre navigateur ne supporte pas l'ĂŠlĂŠment audio
+Your browser does not support audio | Votre navigateur ne supporte pas l'élément audio
 </audio>
 
 </div>
@@ -239,7 +244,7 @@ if (! isset($callsign) || $callsign == '') // Leave
   echo "Please type in a callsign";
 } else
 
-if (!preg_match("@[A-Za-z0-9/]{3,}@", $callsign)) // Callsign error !
+if (!preg_match("@^[A-Za-z0-9/]{3,12}$@D", $callsign)) // Callsign error ! (anchored: the whole value must be a callsign)
 {
   echo "Invalid callsign !";
 }
@@ -338,7 +343,7 @@ else {
           }
 
           if ($found == 0)
-          printf('<div class="bg-gray-200 flex items-center justify-end ">%sm %s :</div><div class="bg-gray-200 text-left"><span title="Sorry, no QSO found"> â </span></div>', $band, $mode);
+          printf('<div class="bg-gray-200 flex items-center justify-end ">%sm %s :</div><div class="bg-gray-200 text-left"><span title="Sorry, no QSO found"> ❌ </span></div>', $band, $mode);
         }
         echo '</div>';
       }
@@ -397,7 +402,7 @@ else {
       if ($details["CONTEST_NAME"]== $nomContest)  {
         $selected=" selected ";
       } else $selected ="";
-      $disabled = strpos($err[$nomContest], 'missing') !== false ? 'disabled' : ''; // DĂŠsactiver le select si "missing" est dans la description
+      $disabled = strpos($err[$nomContest], 'missing') !== false ? 'disabled' : ''; // Désactiver le select si "missing" est dans la description
       echo '<option value="' . htmlspecialchars($repertoire) . '" ' . $disabled . $selected. '>' . htmlspecialchars($nomContest) .' ' .$err[$nomContest] . '</option>';
     }
 
@@ -425,7 +430,7 @@ else {
     foreach ($toutesLesLignes as $ligne) {
         $donnees = str_getcsv($ligne, ';');
 
-        // VĂŠrifier si la date est infĂŠrieure Ă  la date du jour
+        // Vérifier si la date est inférieure à la date du jour
         if (isset($donnees[$dateIndex])) {
             $date = $donnees[$dateIndex];
             $timestampDate = strtotime($date . '');
@@ -446,28 +451,28 @@ else {
     // Ouvrez le fichier en mode lecture
     $fichier = fopen($cheminFichierCSV, 'r');
 
-    // VĂŠrifiez si le fichier est ouvert avec succĂ¨s
+    // Vérifiez si le fichier est ouvert avec succès
     if ($fichier) {
-      // Lisez la premiĂ¨re ligne pour ignorer l'en-tĂŞte
+      // Lisez la première ligne pour ignorer l'en-tête
       $entete = fgetcsv($fichier, 0, ';');
 
-      // VĂŠrifiez si la colonne "rĂŠpertoire" existe dans l'en-tĂŞte
+      // Vérifiez si la colonne "répertoire" existe dans l'en-tête
       if (!in_array('DIRECTORY', $entete)) {
         fclose($fichier);
-        return null; // La colonne "rĂŠpertoire" est manquante dans le fichier CSV.
+        return null; // La colonne "répertoire" est manquante dans le fichier CSV.
       }
 
       // Parcourez le fichier ligne par ligne
       while (($ligne = fgetcsv($fichier, 0, ';')) !== false) {
-        // AccĂŠdez Ă  la valeur de la colonne "rĂŠpertoire"
+        // Accédez à la valeur de la colonne "répertoire"
         $repertoire = $ligne[array_search('DIRECTORY', $entete)];
 
-        // VĂŠrifiez si le rĂŠpertoire correspond Ă  celui recherchĂŠ
+        // Vérifiez si le répertoire correspond à celui recherché
         if ($repertoire === $nomRepertoire) {
           // Fermez le fichier
           fclose($fichier);
 
-          // Retournez toutes les donnĂŠes de la ligne
+          // Retournez toutes les données de la ligne
           return array_combine($entete, $ligne);
         }
       }
@@ -476,7 +481,7 @@ else {
       fclose($fichier);
     }
 
-    // Aucune correspondance trouvĂŠe pour le rĂŠpertoire spĂŠcifiĂŠ
+    // Aucune correspondance trouvée pour le répertoire spécifié
     return null;
   }
   ?>
